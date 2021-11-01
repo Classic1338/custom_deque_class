@@ -33,13 +33,30 @@ public:
 		return item[index];
 	}
 
+	bool is_empty() {
+		return size == 0;
+	}
+
+	void clear_deque() {
+		static int deque_size = size;
+
+		for (int i = 0; i < deque_size; i++) {
+			pop_back();
+		}
+	}
+
 	void push_back(T data) {
 		item[size] = data;
 		size++;
 	}
 
 	void pop_back() {
-		item[size - 1] = {};
+		size--;
+		item[get_length()] = {};
+	}
+
+	void clear_index(int index) {
+		item[index] = {};
 		size--;
 	}
 

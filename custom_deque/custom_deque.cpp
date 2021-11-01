@@ -6,12 +6,18 @@
 
 int main()
 {
-	deque<const char*> test;
+	deque<int> test;
 
-	test.push_back("test");
-	test.push_back("test2");
-	test.push_back("test3");
-	test.push_back("test4");
+	test.push_back(12313);
+	test.push_back(532434);
+	test.push_back(223423);
+	test.push_back(23523);
+
+	if (!test.is_empty()) {
+		test.clear_deque();
+
+		Sleep(INFINITE);
+	}
 
 	std::cout << "index 0: " << test.at(0) << "\n";
 
