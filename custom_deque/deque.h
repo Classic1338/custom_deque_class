@@ -1,15 +1,14 @@
 //Custom datatypes MUST have a default constructor, otherwise it'll error!
-struct test_t {
-	test_t() = default;
-	test_t(int a, int b, int c) :
-	a(a),
+struct color_t {
+	color_t() = default;
+	color_t(int r, int g, int b, int a) :
+	r(r),
+	g(g),
 	b(b),
-	c(c) 
+	a(a)
 	{}
 
-	int a;
-	int b;
-	int c;
+	int r, g, b, a;
 };
 
 template <typename T>
@@ -23,11 +22,11 @@ public:
 		return item[get_size()];
 	}
 
-	T at(int index) {
+	T at(const int& index) {
 		if (index >= size) {
 			printf("index out of range! \n");
 
-			return item[index];
+			return item[0];
 		}
 
 		return item[index];
@@ -42,10 +41,12 @@ public:
 
 		for (int i = 0; i < deque_size; i++) {
 			pop_back();
+		//	delete[] item;
 		}
 	}
 
 	void push_back(T data) {
+	//	item = new T[size];
 		item[size] = data;
 		size++;
 	}
@@ -53,22 +54,23 @@ public:
 	void pop_back() {
 		size--;
 		item[get_length()] = {};
+	//	delete[] item;
 	}
 
-	void clear_index(int index) {
+	void clear_index(const int& index) {
 		item[index] = {};
 		size--;
 	}
 
-	size_t get_size() {
+	int get_size() {
 		return size - 1;
 	}
 
-	size_t get_length() {
+	int get_length() {
 		return size;
 	}
 
-	void force_size(size_t max_size) {
+	void force_size(const int& max_size) {
 		if (size > max_size) {
 			pop_back();
 		}
@@ -76,4 +78,5 @@ public:
 private:
 	int size = 0;
 	T item[];
+	//T* item;
 };
