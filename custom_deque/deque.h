@@ -1,5 +1,18 @@
-template <typename T>
+//Custom datatypes MUST have a default constructor, otherwise it'll error!
+struct test_t {
+	test_t() = default;
+	test_t(int a, int b, int c) :
+	a(a),
+	b(b),
+	c(c) 
+	{}
 
+	int a;
+	int b;
+	int c;
+};
+
+template <typename T>
 class deque {
 public:
 	T get_front() {
@@ -11,6 +24,12 @@ public:
 	}
 
 	T at(int index) {
+		if (index >= size) {
+			printf("index out of range! \n");
+
+			return item[index];
+		}
+
 		return item[index];
 	}
 
@@ -20,7 +39,7 @@ public:
 	}
 
 	void pop_back() {
-		item[size] = {};
+		item[size - 1] = {};
 		size--;
 	}
 
@@ -30,6 +49,12 @@ public:
 
 	size_t get_length() {
 		return size;
+	}
+
+	void force_size(size_t max_size) {
+		if (size > max_size) {
+			pop_back();
+		}
 	}
 private:
 	int size = 0;
